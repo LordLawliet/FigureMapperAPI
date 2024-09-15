@@ -1,0 +1,52 @@
+
+spring:
+  application:
+    name: figure-mapper-api
+  profiles:
+    active: prod
+server:
+  servlet:
+    context-path: /figureMapperAPI
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    password: ${DB_PASSWORD}
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+  jpa:
+    database: POSTGRESQL
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+  sql:
+    init:
+      platform: postgres
+  jwt:
+    secret:
+      key: ${JWT_SECRET_KEY}
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    password: ${DB_PASSWORD_AZURE}
+    url: ${DB_URL_AZURE}
+    username: ${DB_USERNAME_AZURE}
+  jpa:
+    database: POSTGRESQL
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+  sql:
+    init:
+      platform: postgres
+  jwt:
+    secret:
+      key: ${JWT_SECRET_KEY}
